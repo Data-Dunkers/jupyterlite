@@ -1,4 +1,5 @@
-# Core modules (mandatory)
+# a change to try to get version 0.9.3 of anywidgets
+# Core modules (mandatory) 
 jupyterlite-core==0.2.3
 jupyterlab~=4.0.11
 notebook~=7.0.7
@@ -47,3 +48,16 @@ ipyleaflet
 # Python: plotting libraries (optional)
 plotly>=5,<6
 bqplot
+
+# Data Dunkers specific
+
+# Extensions
+theme-darcula
+jupyterlab-open-url-parameter
+
+# Python: visualization libraries
+nbformat
+pyodide_http
+haversine
+folium
+anywidget
