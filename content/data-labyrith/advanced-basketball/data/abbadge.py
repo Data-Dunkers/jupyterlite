@@ -1,10 +1,14 @@
 def get_badge(name):
     """
-    Returns a badge image with the name of the person who completed the labyrinth.
+    Returns a badge image with the name of the person who completed the labyrinth,
+    and displays an automatic HTML download link in Jupyter.
     """
     import requests
     from PIL import Image, ImageDraw, ImageFont
     import datetime
+    import io
+    import base64
+    from IPython.display import HTML, display
     now = datetime.datetime.now()
     date = now.strftime("%Y-%m-%d")
 
@@ -63,5 +67,16 @@ def get_badge(name):
     draw.text((150, 20+font_size*4+12+180), '#datadunkers', fill=(242, 103, 34), font=ImageFont.truetype(io.BytesIO(r.content), size=20))
     draw.text((300, 20+font_size*4+12+180), '#callysto', fill=(242, 103, 34), font=ImageFont.truetype(io.BytesIO(r.content), size=20))
     
+    # Generate and display the HTML download link
+    buf = io.BytesIO()
+    image.save(buf, format="PNG")
+    img_str = base64.b64encode(buf.getvalue()).decode()
+    
+    # Customizing the filename using the person's name
+    filename = f"{name.lower().replace(' ', '_')}_badge.png"
+    download_link = f'<a href="data:image/png;base64,{img_str}" download="{filename}" style="font-weight:bold; color:#f26722;">Click here to download badge</a>'
+    
+    display(HTML(download_link))
+
     #return(image.resize((200, 225)))
     return(image)
